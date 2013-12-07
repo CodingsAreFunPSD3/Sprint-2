@@ -16,6 +16,7 @@ public class SessionController {
 	    @RequestMapping(value="/session")
 	    public ModelAndView sessionStore(HttpServletRequest request) {
 	        // Handle a new session (if any):
+	        String module = request.getParameter("module");
 	        String lect = request.getParameter("lect");
 	        String comp = request.getParameter("comp");
 	        String date = request.getParameter("date");
@@ -24,12 +25,14 @@ public class SessionController {
 	        String duration = request.getParameter("duration");
 	        String repeatFreq = request.getParameter("repeatFreq");
 	        String maxAttend = request.getParameter("maxAttend");
+	        String course = request.getParameter("course");
+	      
 	       
 	        if (date != null){
 	        	if (comp == null){
-	        		comp = "no";
+	        		comp = "Not Compulsory";
 	        	}
-	        	sessionDAO.persist(new Session(date, time, venue, lect, repeatFreq, duration, comp, maxAttend));
+	        	sessionDAO.persist(new Session(module, date, time, venue, lect, repeatFreq, duration, comp, maxAttend, course));
 	        }
 	        return new ModelAndView("session.jsp", "sessionDAO", sessionDAO);
 	    }
@@ -63,4 +66,10 @@ public class SessionController {
 		public ModelAndView viewYearlyTimeTable(){
 			return new ModelAndView("yearly.jsp", "sessionDAO", sessionDAO);
 		}
+	    
+	    @RequestMapping("SignUp")
+		public ModelAndView SignUp(){
+			return new ModelAndView("SignUp.jsp", "sessionDAO", sessionDAO);
+		}
+	    
 }

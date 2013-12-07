@@ -6,17 +6,38 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login Page</title>
-
 </head>
 <body>
-  
+
+<%
+Cookie courseName = new Cookie("courseName", null);
+courseName.setMaxAge(0);
+courseName.setValue("");
+response.addCookie(courseName);
+%> 
+
+
 <% if ("admin".equals(request.getParameter("userName")) && "password1".equals(request.getParameter("password"))) { %>
 <jsp:forward page="session.html" />
 <% } %>
 
-<% if ("student1".equals(request.getParameter("userName")) && "123456".equals(request.getParameter("password"))) { %>
-<jsp:forward page="view.html" />
-<% } %>
+<% if ("student1".equals(request.getParameter("userName")) && "123456".equals(request.getParameter("password"))) { 
+   // Create cookies for courseName.      
+   courseName.setValue("Computing Science");
+   // Set expiry date after 24 Hrs for the cookie.
+   courseName.setMaxAge(60*60*24); 
+   // Add the cookie in the response header.
+   response.addCookie(courseName);
+   response.sendRedirect("view.html");
+ } %>
+
+<% if ("student2".equals(request.getParameter("userName")) && "student2".equals(request.getParameter("password"))) { 
+  //<jsp:forward page="session.html"/>
+   courseName.setValue("EEE");
+   courseName.setMaxAge(60*60*24); 
+   response.addCookie(courseName);
+   response.sendRedirect("view.html");
+ } %>
 
         <h1>Please login</h1>
     
@@ -26,9 +47,7 @@
 		Password: <input type="password" name="password"/>
 		<br />
 		<input type="submit" value="Submit" />
-		
 		</form>
-
  <% 
 if(request.getParameter("userName") != null && request.getParameter("password") != null ) {
 %>

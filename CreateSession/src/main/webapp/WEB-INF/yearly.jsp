@@ -11,25 +11,43 @@
         <title>View TimeTable</title>        
     </head>
  
+ <%
+   Cookie cookie = null;
+   Cookie[] cookies = null;
+   // Get an array of Cookies associated with this domain
+   cookies = request.getCookies();
+   if( cookies != null){
+      for (int i = 0; i < cookies.length; i++){
+    	  if (!cookies[i].getName().contains("JSESSIONID")){
+         cookie = cookies[i];
+      	}
+      }
+  } 
+%> 
+ 
     <body>
  
  <form method="POST" action="yearly.html">
- <a href="view.html">Click here to go back</a>
 </form>
 <table border ="1">  
       <tr>
+      <th>Module</th>
       <th>Date</th>
       <th>Time</th>
       <th>Venue</th>
       <th>Lecturer</th>
       <th>Duration</th>
       <th>Compulsory</th>
-  <!--<th>Repeat Frequency</th> -->
+      <th>Repeat Frequency</th>
       <th>Max Attendance</th>
       </tr>
-      <% for (Session sessionAll : sessionDAO.getYearlySession()) { %>
-            <%= sessionAll %> 
-        <% } %>                
+   <% 
+      for (String retval: cookie.getValue().split(";")){
+        if (retval.contains("Yearly")) {
+        	out.println(retval);
+    	  }
+       }
+     %>                      
  </table>
  
  <a href="/CreateSession"><button type="button">Logout</button></a>

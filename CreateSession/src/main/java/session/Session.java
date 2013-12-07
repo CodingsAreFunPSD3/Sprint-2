@@ -1,15 +1,11 @@
 package session;
 
-import java.io.Serializable;
-import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Session implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
+public class Session {
 	 
     // Persistent Fields:
     @Id @GeneratedValue
@@ -22,12 +18,15 @@ public class Session implements Serializable {
     private String duration;
     private String repeatFreq;
     private String maxAttend;
+    private String course;
+    private String module;
     
     // Constructors:
     public Session() {
     }
     
-    public Session(String date, String time, String venue, String lect, String repeatFreq, String duration, String comp, String maxAttend) {
+    public Session(String module, String date, String time, String venue, String lect, String repeatFreq, String duration, String comp, String maxAttend, String course) {
+    	this.module = module;
     	this.date = date;
     	this.time = time;
     	this.venue = venue;
@@ -36,16 +35,18 @@ public class Session implements Serializable {
     	this.duration = duration;
     	this.comp = comp;
     	this.maxAttend = maxAttend;
+    	this.course = course;
     }
- 
+    
     // String Representation:
     @Override
     public String toString() {
-     //   return "Session Details: Lecturer = " + lect + " saved.";
-  //  return "<tr> <td>" + date + "</td> <td>" + time +"</td> <td>" + venue + "</td> <td>" + lect + "</td> <td>" + duration + "</td> <td>" + 
-    //		 comp + "</td> <td>"+ repeatFreq + "</td> <td>" + maxAttend + " </td> </tr>";
-    	 return "<tr> <td>" + date + "</td> <td>" + time +"</td> <td>" + venue + "</td> <td>" + lect + "</td> <td>" + duration + "</td> <td>" + 
-		 comp + "</td> <td>" + maxAttend + " </td> </tr>";
+    	 //return "<tr> <td>" + module + "</td> <td>" + date + "</td> <td>" + time +"</td> <td>" + venue + "</td> <td>" + lect + "</td> <td>" + duration + "</td> <td>" + 
+		 //comp + "</td> <td>"+ repeatFreq + "</td> <td>" + maxAttend + " </td> </tr>";
+     	 return "<td>" + module + "</td> <td>" + date + "</td> <td>" + time +"</td> <td>" + venue + "</td> <td>" + lect + "</td> <td>" + duration + "</td> <td>" + 
+   		 comp + "</td> <td>"+ repeatFreq + "</td> <td>" + maxAttend + " </td>";
+       
     } 
+
 
 }
