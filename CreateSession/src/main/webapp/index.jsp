@@ -10,6 +10,7 @@
 <body>
 
 <%
+//Creating new cookie name courseName
 Cookie courseName = new Cookie("courseName", null);
 courseName.setMaxAge(0);
 courseName.setValue("");
@@ -21,12 +22,11 @@ response.addCookie(courseName);
 <jsp:forward page="session.html" />
 <% } %>
 
-<% if ("student1".equals(request.getParameter("userName")) && "123456".equals(request.getParameter("password"))) { 
-   // Create cookies for courseName.      
+<% if ("student1".equals(request.getParameter("userName")) && "123456".equals(request.getParameter("password"))) {       
    courseName.setValue("Computing Science");
-   // Set expiry date after 24 Hrs for the cookie.
+   // Set expiry date for the cookie, after 24H.
    courseName.setMaxAge(60*60*24); 
-   // Add the cookie in the response header.
+   // Add the cookie 
    response.addCookie(courseName);
    response.sendRedirect("view.html");
  } %>

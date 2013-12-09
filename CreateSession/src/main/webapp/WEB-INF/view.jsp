@@ -14,13 +14,13 @@
  
 <%
    Cookie cookie = null;
-   Cookie[] cookies = null;
-   // Get an array of Cookies associated with this domain
-   cookies = request.getCookies();
-   if( cookies != null){
-      for (int i = 0; i < cookies.length; i++){
-    	  if (!cookies[i].getName().contains("JSESSIONID")){
-         cookie = cookies[i];
+   Cookie[] cookiesArray = null;
+   // Get an array of Cookies
+   cookiesArray = request.getCookies();
+   if (cookiesArray != null){
+      for (int i = 0; i < cookiesArray.length; i++){
+    	  if (!cookiesArray[i].getName().contains("JSESSIONID")){
+         cookie = cookiesArray[i];
       	}
       }
   } 
@@ -28,24 +28,29 @@
  
   
  <% if ("one".equals(request.getParameter("repeatFreq"))) { %>
-<jsp:forward page="/once.html" />
+  <!-- response.sendRedirect("/CreateSession/once.html"); -->
+  <jsp:forward page="/once.html" />
 <% } %>
 
  <% if ("daily".equals(request.getParameter("repeatFreq"))) { %>
-<jsp:forward page="/daily.html" />
+  <!-- response.sendRedirect("/CreateSession/daily.html"); -->
+  <jsp:forward page="/daily.html" />
 <% } %>
  
  <% if ("weekly".equals(request.getParameter("repeatFreq"))) { %>
-<jsp:forward page="/weekly.html" />
-<% } %>
+ <!--  response.sendRedirect("/CreateSession/weekly.html"); -->
+ <jsp:forward page="/weekly.html" />
+ <% } %>
  
  <% if ("monthly".equals(request.getParameter("repeatFreq"))) { %>
-<jsp:forward page="/monthly.html" />
+ <!-- response.sendRedirect("/CreateSession/monthly.html"); -->
+ <jsp:forward page="/monthly.html" />
 <% } %>
 
  <% if ("yearly".equals(request.getParameter("repeatFreq"))) { %>
-<jsp:forward page="/yearly.html" />
-<% } %>
+  <!-- response.sendRedirect("/CreateSession/yearly.html"); -->
+ <jsp:forward page="/yearly.html" />
+<%} %>
  
  <body>
  <a href="SignUp.html">Click here to Sign Up for a session</a>

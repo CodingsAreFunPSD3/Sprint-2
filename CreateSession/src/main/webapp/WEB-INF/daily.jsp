@@ -15,13 +15,12 @@
  
  <%
    Cookie cookie = null;
-   Cookie[] cookies = null;
-   // Get an array of Cookies associated with this domain
-   cookies = request.getCookies();
-   if( cookies != null){
-      for (int i = 0; i < cookies.length; i++){
-    	  if (!cookies[i].getName().contains("JSESSIONID")){
-         cookie = cookies[i];
+   Cookie[] cookiesArray = null;
+   cookiesArray = request.getCookies();
+   if (cookiesArray != null){
+      for (int i = 0; i < cookiesArray.length; i++){
+    	  if (!cookiesArray[i].getName().contains("JSESSIONID")){
+         cookie = cookiesArray[i];
          //out.print("Value: " + cookie.getValue() +" <br/>");
       	}
       }
@@ -45,9 +44,9 @@
       <th>Max Attendance</th>
       </tr>          
       <% 
-      for (String retval: cookie.getValue().split(";")){
-        if (retval.contains("Daily")) {
-        	out.println(retval);
+      for (String getResults : cookie.getValue().split(";")){
+        if (getResults.contains("Daily")) {
+        	out.println(getResults);
     	  }
        }
      %>
